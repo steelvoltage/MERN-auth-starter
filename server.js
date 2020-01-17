@@ -10,7 +10,6 @@ const { NODE_ENV, PORT } = require("./config/env");
 const app = express();
 const authRouter = require("./api/auth/authRouter");
 const userRouter = require("./api/user/userRouter");
-const createRootAdmin = require("./config/createRootAdmin");
 
 // DB CONNECTION
 
