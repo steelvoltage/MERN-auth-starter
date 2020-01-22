@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import MessageContext from "../../context/MessageContext";
 
-export default function Login({ history }) {
+export default function Register({ history }) {
   const { register, isAuthenticated } = useContext(AuthContext);
   const { showMessage } = useContext(MessageContext);
 
