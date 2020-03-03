@@ -39,11 +39,14 @@ export default function Navbar() {
   );
 
   return (
-    <div>
-      <Link to="/" style={{ display: "block" }}>
-        Home
-      </Link>
-      {!loading && <>{isAuthenticated ? userLinks : guestLinks}</>}
-    </div>
+    <>
+      <div style={{ textAlign: "right", margin: "1rem" }}>
+        <Link to="/" style={{ display: "block" }}>
+          Home
+        </Link>
+        {!loading && <>{isAuthenticated ? userLinks : guestLinks}</>}
+      </div>
+      <hr />
+    </>
   );
 }

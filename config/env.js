@@ -5,6 +5,5 @@ module.exports = {
   PORT: process.env.PORT,
   MONGO_URI: process.env.MONGO_URI,
   JWT_SECRET: process.env.JWT_SECRET,
-  ROOT_ADMIN_PASSWORD: process.env.ROOT_ADMIN_PASSWORD,
   BASE_URL: "http://localhost:3000"
 };

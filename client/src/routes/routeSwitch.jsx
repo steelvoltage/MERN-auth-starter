@@ -1,17 +1,21 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "./protectedRoute";
 
-import Login from "../pages/login";
-import Register from "../pages/register";
-import Dashboard from "../pages/dashboard";
-import ResetPassword from "../pages/resetPassword";
-import ResetPasswordNew from "../pages/resetPasswordNew";
-import UserSettings from "../pages/userSettings/index";
-import NotFound from "../pages/notFound";
+import {
+  Login,
+  Register,
+  Dashboard,
+  ResetPassword,
+  ResetPasswordNew,
+  UserSettings,
+  VerifyEmail,
+  SendVerifyEmail,
+  NotFound
+} from "../pages";
 
-export default function Routes() {
+export default function RouteSwitch() {
   return (
     <Switch>
       <ProtectedRoute exact path="/" component={Dashboard} />
@@ -20,6 +24,8 @@ export default function Routes() {
       <Route path="/register" component={Register} />
       <Route path="/reset-password/:id/:token" component={ResetPasswordNew} />
       <Route path="/reset-password" component={ResetPassword} />
+      <Route path="/verify/:id/:token" component={VerifyEmail} />
+      <Route path="/verify" component={SendVerifyEmail} />
       <Route component={NotFound} />
     </Switch>
   );

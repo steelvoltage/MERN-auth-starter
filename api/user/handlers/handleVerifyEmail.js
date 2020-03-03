@@ -2,7 +2,6 @@ const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 
 const User = require("../../../models/User");
-const { hashPassword } = require("../../../helpers/password");
 const checkValidId = require("../../../helpers/checkValidId");
 
 module.exports = async function(req, res) {
@@ -12,10 +11,9 @@ module.exports = async function(req, res) {
     return res.status(400).json({ error });
   }
 
-  const error =
-    "Invalid password reset attempt. Please reset it again or contact the administrator.";
+  const error = "Invalid email verification attempt.";
 
-  const { id, token, password } = req.body;
+  const { id, token } = req.body;
 
   const idIsValid = checkValidId(id);
 
@@ -29,20 +27,28 @@ module.exports = async function(req, res) {
     return res.status(400).json({ error });
   }
 
-  const secret = user.password + "-" + user.createdAt;
+  if (user.emailVerified) {
+    return res
+      .status(400)
+      .json({ error: "Your email address has already been verified." });
+  }
+
+  const secret = user.email + "-" + user.createdAt;
   const decoded = await jwt.decode(token, secret);
 
   if (!decoded) {
     return res.status(400).json({ error });
   }
 
-  const hashedPassword = await hashPassword(password);
+  if (decoded.user.email !== user.email) {
+    return res.status(400).json({ error });
+  }
 
   await User.findByIdAndUpdate(user.id, {
-    password: hashedPassword
+    emailVerified: true
   });
 
   return res
     .status(200)
-    .json({ success: "Password has been updated, please login using it." });
+    .json({ success: "Your email address has been verified. Thank you." });
 };

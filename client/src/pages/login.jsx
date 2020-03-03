@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import AuthContext from "../../context/AuthContext";
+import { Link, useHistory } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
-export default function Login({ history }) {
+export default function Login() {
   const { login, isAuthenticated } = useContext(AuthContext);
+  const { push } = useHistory();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,9 +12,9 @@ export default function Login({ history }) {
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push("/");
+      return push("/");
     }
-  }, [isAuthenticated, history]);
+  }, [isAuthenticated, push]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -21,7 +22,7 @@ export default function Login({ history }) {
     if (!loginResult || loginResult.error) {
       return setLoginError(loginResult.error);
     }
-    return history.push("/");
+    return push("/");
   };
 
   return (

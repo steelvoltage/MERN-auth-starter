@@ -3,12 +3,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import AuthState from "./context/AuthState";
 import MessageState from "./context/MessageState";
+import RouteSwitch from "./routes/routeSwitch";
+import { Navbar, Message } from "./components/layout";
 
-import Routes from "./components/routes/routes";
-import Navbar from "./components/layout/navbar";
-import Message from "./components/layout/message";
-
-import setHeaderToken from "./helpers/setHeaderToken";
+import { setHeaderToken } from "./helpers";
+import "./styles/global.css";
 
 // SET THE AXIOS TOKEN HEADER FOR AUTHENTICATION
 
@@ -22,8 +21,10 @@ export default function App() {
       <MessageState>
         <Router>
           <Navbar />
-          <Message />
-          <Routes />
+          <main style={{ margin: "1rem" }}>
+            <Message />
+            <RouteSwitch />
+          </main>
         </Router>
       </MessageState>
     </AuthState>

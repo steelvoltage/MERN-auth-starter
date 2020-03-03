@@ -14,7 +14,7 @@ const UserSchema = new Schema(
       type: String,
       required: true
     },
-    isAdmin: {
+    emailVerified: {
       type: Boolean,
       default: false
     }

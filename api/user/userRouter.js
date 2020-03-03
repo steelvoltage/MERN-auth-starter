@@ -9,6 +9,7 @@ const validateUserNew = require("./validators/validateUserNew");
 const validateChangeName = require("./validators/validateChangeName");
 const validateChangeEmail = require("./validators/validateChangeEmail");
 const validateChangePass = require("./validators/validateChangePass");
+const validateVerifyEmail = require("./validators/validateVerifyEmail");
 
 const handlePassReset = require("./handlers/handlePassReset");
 const handlePassNew = require("./handlers/handlePassNew");
@@ -16,27 +17,23 @@ const handleUserNew = require("./handlers/handleUserNew");
 const handleChangeName = require("./handlers/handleChangeName");
 const handleChangeEmail = require("./handlers/handleChangeEmail");
 const handleChangePass = require("./handlers/handleChangePass");
+const handleVerifyEmail = require("./handlers/handleVerifyEmail");
+const handleVerifyEmailMessage = require("./handlers/handleVerifyEmailMessage");
 
-router.post("/reset-password", validatePassReset, (req, res) =>
-  handlePassReset(req, res)
-);
+router.post("/new", validateUserNew, handleUserNew);
 
-router.post("/reset-password/new", validatePassNew, (req, res) =>
-  handlePassNew(req, res)
-);
+router.get("/verify-email", auth, handleVerifyEmailMessage);
 
-router.post("/new", validateUserNew, (req, res) => handleUserNew(req, res));
+router.patch("/verify-email", validateVerifyEmail, handleVerifyEmail);
 
-router.post("/change/name", auth, validateChangeName, (req, res) => {
-  handleChangeName(req, res);
-});
+router.patch("/reset-password", validatePassReset, handlePassReset);
 
-router.post("/change/email", auth, validateChangeEmail, (req, res) => {
-  handleChangeEmail(req, res);
-});
+router.patch("/reset-password/new", validatePassNew, handlePassNew);
 
-router.post("/change/password", auth, validateChangePass, (req, res) => {
-  handleChangePass(req, res);
-});
+router.patch("/change/name", auth, validateChangeName, handleChangeName);
+
+router.patch("/change/email", auth, validateChangeEmail, handleChangeEmail);
+
+router.patch("/change/password", auth, validateChangePass, handleChangePass);
 
 module.exports = router;

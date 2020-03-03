@@ -6,8 +6,8 @@ const handleAuth = require("./handlers/handleAuth");
 const handleLogin = require("./handlers/handleLogin");
 const auth = require("../../middleware/auth");
 
-router.get("/", auth, (req, res) => handleAuth(req, res));
+router.get("/", auth, handleAuth);
 
-router.post("/", validateLogin, (req, res) => handleLogin(req, res));
+router.post("/", validateLogin, handleLogin);
 
 module.exports = router;

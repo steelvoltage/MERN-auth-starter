@@ -78,7 +78,7 @@ export default function AuthState({ children }) {
   const resetPassword = async email => {
     const body = JSON.stringify({ email });
     try {
-      const res = await axios.post(
+      const res = await axios.patch(
         "/api/user/reset-password",
         body,
         requestHeaders
@@ -93,7 +93,7 @@ export default function AuthState({ children }) {
   const resetPasswordNew = async (id, token, password, passwordTwo) => {
     const body = JSON.stringify({ id, token, password, passwordTwo });
     try {
-      const res = await axios.post(
+      const res = await axios.patch(
         "/api/user/reset-password/new",
         body,
         requestHeaders
@@ -108,7 +108,7 @@ export default function AuthState({ children }) {
   const changeName = async name => {
     const body = JSON.stringify({ name });
     try {
-      const res = await axios.post(
+      const res = await axios.patch(
         "/api/user/change/name",
         body,
         requestHeaders
@@ -123,7 +123,7 @@ export default function AuthState({ children }) {
   const changeEmail = async email => {
     const body = JSON.stringify({ email });
     try {
-      const res = await axios.post(
+      const res = await axios.patch(
         "/api/user/change/email",
         body,
         requestHeaders
@@ -146,8 +146,36 @@ export default function AuthState({ children }) {
       newPasswordTwo
     });
     try {
-      const res = await axios.post(
+      const res = await axios.patch(
         "/api/user/change/password",
+        body,
+        requestHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.error(err);
+      return { error: err.response.data.error };
+    }
+  };
+
+  const sendVerifyEmail = async () => {
+    try {
+      const res = await axios.get("/api/user/verify-email");
+      return res.data;
+    } catch (err) {
+      console.error(err);
+      return { error: err.response.data.error };
+    }
+  };
+
+  const verifyEmail = async (id, token) => {
+    const body = JSON.stringify({
+      id,
+      token
+    });
+    try {
+      const res = await axios.patch(
+        "/api/user/verify-email",
         body,
         requestHeaders
       );
@@ -170,7 +198,9 @@ export default function AuthState({ children }) {
         resetPasswordNew,
         changeName,
         changeEmail,
-        changePassword
+        changePassword,
+        verifyEmail,
+        sendVerifyEmail
       }}
     >
       {children}

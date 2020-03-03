@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import AuthContext from "../../../../context/AuthContext";
-import MessageContext from "../../../../context/MessageContext";
+import AuthContext from "../../../context/AuthContext";
+import MessageContext from "../../../context/MessageContext";
 
 export default function ChangePassword() {
   const { changePassword, logout } = useContext(AuthContext);
@@ -60,7 +60,7 @@ export default function ChangePassword() {
           />
         </div>
         <div>
-          <button type="submit">Change</button>
+          <button type="submit">Submit</button>
         </div>
       </form>
     </>

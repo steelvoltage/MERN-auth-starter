@@ -29,9 +29,10 @@ module.exports = async function(req, res) {
     return res.status(400).json({ error });
   }
 
-  await User.findByIdAndUpdate(req.user.id, { email });
+  await User.findByIdAndUpdate(req.user.id, { email, emailVerified: false });
 
   res.status(200).json({
-    success: "Your email has been changed. Please login again using new email."
+    success:
+      "The email on file for your account has been changed and a verification email was sent."
   });
 };

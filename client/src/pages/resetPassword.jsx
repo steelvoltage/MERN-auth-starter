@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import AuthContext from "../../context/AuthContext";
-import MessageContext from "../../context/MessageContext";
+import AuthContext from "../context/AuthContext";
+import MessageContext from "../context/MessageContext";
 
 export default function ResetPassword({ history }) {
   const { resetPassword, isAuthenticated } = useContext(AuthContext);

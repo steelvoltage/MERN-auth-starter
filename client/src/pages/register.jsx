@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import AuthContext from "../../context/AuthContext";
-import MessageContext from "../../context/MessageContext";
+import { Link, useHistory } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+import MessageContext from "../context/MessageContext";
 
-export default function Register({ history }) {
+export default function Register() {
   const { register, isAuthenticated } = useContext(AuthContext);
   const { showMessage } = useContext(MessageContext);
+  const { push } = useHistory();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,9 +16,9 @@ export default function Register({ history }) {
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push("/");
+      push("/");
     }
-  }, [isAuthenticated, history]);
+  }, [isAuthenticated, push]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -26,7 +27,7 @@ export default function Register({ history }) {
       return setRegisterError(registerResult.error);
     }
     showMessage(registerResult);
-    return history.push("/");
+    return push("/");
   };
 
   return (
