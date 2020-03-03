@@ -26,8 +26,7 @@ export default function SendVerifyEmail() {
       <p>
         We previously sent a verification email to {user.email}. Please check
         your inbox or spam folders and use the link to complete the
-        verification. If you do not see the email, please click the resend
-        below.
+        verification. If you do not see the email, please click resend below.
       </p>
       <p>
         <button onClick={handleSendVerifyEmail}>Resend</button>
